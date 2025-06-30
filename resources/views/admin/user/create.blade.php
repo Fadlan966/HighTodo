@@ -1,0 +1,99 @@
+@extends('layouts.app')
+
+@section('content')
+    <h1 class="h3 mb-4 text-gray-800">
+        <i class="fas fa-plus mr-2"></i>
+        {{ $title }}
+    </h1>
+
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <a href="{{ route('user') }}" class="btn btn-sm btn-success">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Back to User Data
+            </a>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('userStore') }}" method="post">
+                @csrf
+                <div class="row mb-3">
+                    <div class="col-xl-6 mb-3">
+                        <label for="name" class="form-label">
+                            <span class="text-danger">*</span>
+                            Name :
+                        </label>
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                            value="{{ old('name') }}">
+                        @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="col-xl-6">
+                        <label for="email" class="form-label">
+                            <span class="text-danger">*</span>
+                            Email :
+                        </label>
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                            value="{{ old('email') }}">
+                        @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-xl-12">
+                        <label for="role" class="form-label">
+                            <span class="text-danger">*</span>
+                            Role :
+                        </label>
+                        <select name="role" class="form-control @error('role') is-invalid @enderror">
+                            <option selected disabled>-- Select Role --</option>
+                            <option value="admin">Admin</option>
+                            <option value="employee">Employee</option>
+                        </select>
+                        @error('role')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-xl-6 mb-3">
+                        <label for="password" class="form-label">
+                            <span class="text-danger">*</span>
+                            Password :
+                        </label>
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
+                        @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="col-xl-6">
+                        <label for="password_confirmation" class="form-label">
+                            <span class="text-danger">*</span>
+                            Password Confirmation :
+                        </label>
+                        <input type="password" name="password_confirmation"
+                            class="form-control @error('role') is-invalid @enderror">
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save mr-2"></i>
+                        Save Data
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection

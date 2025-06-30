@@ -20,9 +20,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
+        'is_tasks',
         'password',
     ];
 
+    public function tasks()
+    {
+        return $this->hasOne(Task::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
